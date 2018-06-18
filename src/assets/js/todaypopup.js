@@ -64,18 +64,15 @@
                 .css({
                     'width':'100%',
                 })
-                .children('a')
-                .css({
-                    'display':'inline-block',
-                    'position':'relative',
-                    'left':'50%',
-                    'marginLeft':function(){
-                        return - $(this).width()/2
-                    }
-                })
-
-                $this.find('img').load(function(){
-                    console.log('sdf');
+                .children('a').children('img').on('load',function(){
+                    $(this).parent('a').css({
+                        'display':'inline-block',
+                        'position':'relative',
+                        'left':'50%',
+                        'marginLeft':function(){
+                            return - $(this).width()/2
+                        }
+                    })
                 })
 
                 $(init.extendingElement).css('top',init.popHeight);
