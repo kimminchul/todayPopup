@@ -34,7 +34,7 @@
             elContainer += '<img src="'+imgurl+'" alt="'+alt+'"/>';
             elContainer += '</a>';
             elContainer += '</div>';
-            elContainer += '<span class="pop-close-btn" style="position:absolute; right:20px; bottom:20px; font-size:12px">';
+            elContainer += '<span class="pop-close-btn" style="position:absolute; right:20px; bottom:10px; font-size:12px">';
             elContainer += '<input type="checkbox" id="todayCheckbox"/><label for="todayCheckbox"> '+init.btnTitle+'</label>'
             elContainer += '</span>'
 
@@ -70,6 +70,7 @@
                         'position':'relative',
                         'left':'50%',
                         'marginLeft':function(){
+                            
                             return - $(this).width()/2
                         }
                     })
