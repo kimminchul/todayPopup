@@ -5,6 +5,7 @@
 
     $.fn.popupEvent = function(option){
 
+        //popup option
         var init = $.extend({
             idx:0,
             speed:2000,
@@ -13,7 +14,6 @@
             Height:'0px',
             popHeight:'100px',
             popupinfo:[
-                //popup option
                 {
                     imgUrl:'http://via.placeholder.com/1920x100',
                     alt:'sample text',
