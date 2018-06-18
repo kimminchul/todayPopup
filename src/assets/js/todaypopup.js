@@ -6,11 +6,14 @@
     $.fn.popupEvent = function(option){
 
         var init = $.extend({
+            idx:0,
+            speed:2000,
+            random:false,
             extendingElement:'header',
             Height:'0px',
             popHeight:'100px',
             popupinfo:[
-                //팝업정보
+                //popup option
                 {
                     imgUrl:'http://via.placeholder.com/1920x100',
                     alt:'sample text',
@@ -26,14 +29,25 @@
         var elClassName = $this[0].classList[0];
 
 
-        var elementSet = function(link,imgurl,alt,target){
+        var elementSet = function(){
 
             var elContainer = '';
-            elContainer += '<div style="background-color:'+init.popupinfo[0].bgColor+'">';
-            elContainer += '<a href="'+link+'" target="'+target+'">';
-            elContainer += '<img src="'+imgurl+'" alt="'+alt+'"/>';
-            elContainer += '</a>';
-            elContainer += '</div>';
+
+            $.each(init.popupinfo,function(i,e){
+
+                var link = init.popupinfo[i].link;
+                var imgurl = init.popupinfo[i].imgUrl;
+                var alt = init.popupinfo[i].alt;
+                var target = init.popupinfo[i].target;
+                var bgColor = init.popupinfo[i].bgColor;
+
+                elContainer += '<div style="background-color:'+bgColor+'">';
+                elContainer += '<a href="'+link+'" target="'+target+'">';
+                elContainer += '<img src="'+imgurl+'" alt="'+alt+'"/>';
+                elContainer += '</a>';
+                elContainer += '</div>';
+            })
+
             elContainer += '<span class="pop-close-btn" style="position:absolute; right:20px; bottom:10px; font-size:12px">';
             elContainer += '<input type="checkbox" id="todayCheckbox"/><label for="todayCheckbox"> '+init.btnTitle+'</label>'
             elContainer += '</span>'
@@ -53,28 +67,26 @@
                 }
 
                 //open setting
-
-                $this.append(elementSet(init.popupinfo[0].link,init.popupinfo[0].imgUrl,init.popupinfo[0].alt,init.popupinfo[0].target))
-
-                .css({
-                    'overflow':'hiddne',
+                $this.append(elementSet()).css({
+                    'overflow':'hidden',
                     'position':'relative'
-                })
-                .children('div')
-                .css({
+                }).children('div').css({
                     'width':'100%',
-                })
-                .children('a').children('img').on('load',function(){
+                }).children('a').children('img').on('load',function(){
                     $(this).parent('a').css({
                         'display':'inline-block',
                         'position':'relative',
                         'left':'50%',
                         'marginLeft':function(){
-                            
-                            return - $(this).width()/2
+                            return - $(this).width()/2;
                         }
                     })
                 })
+
+                // start index setting
+                if(init.random) init.idx = Math.floor(Math.random() * init.popupinfo.length);
+
+                $this.children('div').eq(init.idx).addClass('on').siblings('div').hide();
 
                 $(init.extendingElement).css('top',init.popHeight);
 

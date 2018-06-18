@@ -35,8 +35,24 @@
 
         <script>
 
-            $('.todaypopup').popupEvent();
-    
+            $('.todaypopup').popupEvent({
+                popupinfo:[
+                    {
+                        imgUrl:'http://via.placeholder.com/1920x100',
+                        alt:'sample text',
+                        link:'http://www.naver.com',
+                        target:'_self',
+                        bgColor:'#CCC'
+                    },{
+                        imgUrl:'http://via.placeholder.com/1920x100',
+                        alt:'sample text',
+                        link:'http://www.navers.com',
+                        target:'_self',
+                        bgColor:'#333'
+                    }
+                ]
+            });
+
 
         </script>
     </body>
