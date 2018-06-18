@@ -1,0 +1,62 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+html {
+  height: 100%;
+}
+html body {
+  margin: 0;
+  height: 100%;
+  background: #000;
+}
+.todaypopup {
+  height: 100px;
+  background: #fff;
+}
+.wrapper {
+  height: 100%;
+}
+.wrapper header {
+  color: #FFF;
+  padding: 50px 0 ;
+  text-align: center;
+}
+.wrapper section {
+  height: 100%;
+  background-color: #EEE;
+}
+.wrapper section h1 {
+  text-align: center;
+  display: block;
+  text-transform: uppercase;
+  color: #666;
+  height: 100%;
+}
+.wrapper section h1 span {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+}
+.wrapper section h1::before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+.wrapper section:nth-child(odd) {
+  background-color: #CCC;
+}
