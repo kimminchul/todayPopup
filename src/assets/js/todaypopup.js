@@ -27,7 +27,7 @@
 
         var $this = $(this);
         var elClassName = $this[0].classList[0];
-
+        var slide_boolen = (init.popupinfo.length == 1 ) ?  false : true;
 
         var elementSet = function(){
 
@@ -41,18 +41,38 @@
                 var target = init.popupinfo[i].target;
                 var bgColor = init.popupinfo[i].bgColor;
 
-                elContainer += '<div style="background-color:'+bgColor+'">';
+                elContainer += '<div style="background-color:'+bgColor+'" id="popup_banner'+i+'">';
                 elContainer += '<a href="'+link+'" target="'+target+'">';
                 elContainer += '<img src="'+imgurl+'" alt="'+alt+'"/>';
                 elContainer += '</a>';
                 elContainer += '</div>';
             })
 
+            if(init.popupinfo.length > 1){
+                elContainer += '<span style="position:absolute; top:10px; right:20px; zindex:1" class="item_clt">';
+                $.each(init.popupinfo,function(i,e){
+                    elContainer += '<a href="#popup_banner'+i+'" style="font-size:0; display:inline-block; width:15px; height:15px; background-color:#AAA; margin:0 2.5px">'+i+'</a>';
+                })
+                elContainer += '</span>';
+            }
             elContainer += '<span class="pop-close-btn" style="position:absolute; right:20px; bottom:10px; font-size:12px">';
             elContainer += '<input type="checkbox" id="todayCheckbox"/><label for="todayCheckbox"> '+init.btnTitle+'</label>'
             elContainer += '</span>'
 
             return elContainer;
+        }
+
+        //슬라이드기능
+        function movmuent (start,end,idx){
+            console.log('실행됨');
+        }
+
+        //start slide event
+        if(slide_boolen){
+
+            // event starter
+            movmuent();
+
         }
 
         var eventSetting = {
@@ -119,6 +139,8 @@
                 return "";
             }
         }
+        console.log(slide_boolen)
+
         eventSetting.openPopup();
         $this.children('.pop-close-btn').on('click',eventSetting.todayclose);
 
