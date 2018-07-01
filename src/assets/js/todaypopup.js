@@ -72,8 +72,8 @@
                 //cookie true
                 if(binCookie == 'done'){
                     $(init.extendingElement).css('top',init.Height);
-                    $this.hide();
-                    return
+                    $this.remove();
+                    return;
                 }
 
                 //open setting
@@ -143,8 +143,18 @@
             },
             todayclose :function(){
                 $(init.extendingElement).css('top',init.Height);
-                $this.hide();
                 eventSetting.setcooki(elClassName,'done',1);
+
+                //del
+                $this.find('.item_clt a').off('click');
+                $this.off('mouseenter');
+                $this.off('mouseleave');
+                $this.children('.pop-close-btn').off('click');
+                clearInterval(itervals);
+                $this.remove();
+
+
+
             },
             setcooki:function(name, value, expiredays){
                 var todayDate = new Date();
