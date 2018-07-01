@@ -13,6 +13,7 @@
             extendingElement:'header',
             Height:'0px',
             popHeight:'100px',
+            interval:true,
             popupinfo:[
                 {
                     imgUrl:'http://via.placeholder.com/1920x100',
@@ -28,6 +29,7 @@
         var $this = $(this);
         var elClassName = $this[0].classList[0];
         var slide_boolen = (init.popupinfo.length == 1 ) ?  false : true;
+        var itervals = 'headler';
 
         var elementSet = function(){
 
@@ -59,21 +61,9 @@
             elContainer += '<input type="checkbox" id="todayCheckbox"/><label for="todayCheckbox"> '+init.btnTitle+'</label>'
             elContainer += '</span>'
 
-            return elContainer;
+            return $(elContainer);
         }
 
-        //슬라이드기능
-        function movmuent (start,end,idx){
-            console.log('실행됨');
-        }
-
-        //start slide event
-        if(slide_boolen){
-
-            // event starter
-            movmuent();
-
-        }
 
         var eventSetting = {
             openPopup:function(){
@@ -103,12 +93,52 @@
                     })
                 })
 
-                // start index setting
-                if(init.random) init.idx = Math.floor(Math.random() * init.popupinfo.length);
 
-                $this.children('div').eq(init.idx).addClass('on').siblings('div').hide();
+                //start slide event
+                if(slide_boolen){
 
-                $(init.extendingElement).css('top',init.popHeight);
+                    movmuent(init.idx,false);
+                    // event starter
+
+                    $this.on('click','.item_clt a',function(){
+                        init.idx = $(this).index();
+                        movmuent(init.idx,true)
+                    });
+
+                    if(init.interval){
+
+                        itervals = setInterval(function(){
+
+                            init.idx ++;
+                            if(init.idx == $('.item_clt a').length){
+                                init.idx = 0
+                            }
+                            movmuent(init.idx,true);
+
+                        },init.speed);
+
+                        $this.on({
+                            'mouseenter':function(){
+                                clearInterval(itervals)
+                            },
+                            'mouseleave':function(){
+
+                                itervals = setInterval(function(){
+
+                                    init.idx ++;
+                                    if(init.idx == $('.item_clt a').length){
+                                        init.idx = 0
+                                    }
+                                    movmuent(init.idx,true);
+
+                                },init.speed);
+                            }
+                        })
+                    }
+
+                }else{
+                    $(init.extendingElement).css('top',init.popHeight);
+                }
 
             },
             todayclose :function(){
@@ -139,7 +169,21 @@
                 return "";
             }
         }
-        console.log(slide_boolen)
+
+        //lotion
+        function movmuent (idx,first){
+            $this.children('div').eq(idx).addClass('on').show(0,function(){
+                if(first){
+                    $(this).find('a').css({
+
+                        'marginLeft':function(){
+                            return -$(this).width()/2;
+                        }
+                    })
+                }
+            }).siblings('div').hide().removeClass('on');
+            $this.children('.item_clt').children('a').eq(idx).addClass('on').css('backgroundColor','red').siblings('a').css('backgroundColor','#aaa').removeClass('on');
+        }
 
         eventSetting.openPopup();
         $this.children('.pop-close-btn').on('click',eventSetting.todayclose);
