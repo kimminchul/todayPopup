@@ -14,6 +14,9 @@
             Height:'0px',
             popHeight:'100px',
             interval:true,
+            dotColor:'blue',
+            dotColorBg:'#AAA',
+
             popupinfo:[
                 {
                     imgUrl:'http://via.placeholder.com/1920x100',
@@ -53,7 +56,7 @@
             if(init.popupinfo.length > 1){
                 elContainer += '<span style="position:absolute; top:10px; right:20px; zindex:1" class="item_clt">';
                 $.each(init.popupinfo,function(i,e){
-                    elContainer += '<a href="#popup_banner'+i+'" style="font-size:0; display:inline-block; width:15px; height:15px; background-color:#AAA; margin:0 2.5px">'+i+'</a>';
+                    elContainer += '<a href="#popup_banner'+i+'" style="font-size:0; display:inline-block; width:15px; height:15px; background-color:'+init.dotColorBg+'; margin:0 2.5px">'+i+'</a>';
                 })
                 elContainer += '</span>';
             }
@@ -192,7 +195,7 @@
                     })
                 }
             }).siblings('div').hide().removeClass('on');
-            $this.children('.item_clt').children('a').eq(idx).addClass('on').css('backgroundColor','red').siblings('a').css('backgroundColor','#aaa').removeClass('on');
+            $this.children('.item_clt').children('a').eq(idx).addClass('on').css('backgroundColor',init.dotColor).siblings('a').css('backgroundColor','#aaa').removeClass('on');
         }
 
         eventSetting.openPopup();
